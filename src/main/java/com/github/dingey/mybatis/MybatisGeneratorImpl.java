@@ -445,7 +445,7 @@ public class MybatisGeneratorImpl implements MybatisGenerator {
             }
             s.deleteCharAt(s.length() - 2);
             s.append("        where ").append(key.getColumnName()).append(" = #{").append(keyName).append("}\n");
-            s.append("    </update>");
+            s.append("    </update>\n");
 
             if (getOption().isMethodAnnotation()) {
                 s.append("    <!-- 根据主键修改，忽略null列 -->\n");
