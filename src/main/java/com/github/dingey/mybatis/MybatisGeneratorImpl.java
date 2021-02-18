@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class MybatisGeneratorImpl implements MybatisGenerator {
-    private JdbcMeta jdbcMeta;
+    private final JdbcMeta jdbcMeta;
     private List<Table> tables = new ArrayList<>();
     private Class<?> extendsModel;
     private Class<?> extendsMapper;
@@ -42,7 +42,7 @@ public class MybatisGeneratorImpl implements MybatisGenerator {
     @Override
     public <T> MybatisGenerator extendsModel(Class<T> extendsModel) {
         this.extendsModel = extendsModel;
-        for (Class a = extendsModel; a != Class.class && a != Object.class && a != null; a = extendsModel.getSuperclass()) {
+        for (Class<?> a = extendsModel; a != Class.class && a != Object.class && a != null; a = extendsModel.getSuperclass()) {
             for (Field f : a.getDeclaredFields()) {
                 extendsClassFields.add(f.getName());
             }
@@ -53,7 +53,7 @@ public class MybatisGeneratorImpl implements MybatisGenerator {
     @Override
     public <T> MybatisGenerator extendsMapper(Class<T> mapperInterface) {
         this.extendsMapper = mapperInterface;
-        for (Class a = mapperInterface; a != Class.class && a != Object.class && a != null; a = mapperInterface.getSuperclass()) {
+        for (Class<?> a = mapperInterface; a != Class.class && a != Object.class && a != null; a = mapperInterface.getSuperclass()) {
             for (Method m : a.getDeclaredMethods()) {
                 extendsClassMethods.add(m.getName());
             }
@@ -160,9 +160,9 @@ public class MybatisGeneratorImpl implements MybatisGenerator {
     private String modelPackage;
     private String mapperPackage;
 
-    private HashSet<String> extendsClassFields = new HashSet<>();
+    private final HashSet<String> extendsClassFields = new HashSet<>();
 
-    private HashSet<String> extendsClassMethods = new HashSet<>();
+    private final HashSet<String> extendsClassMethods = new HashSet<>();
 
     @Override
     public MybatisGenerator generateMapper(String packagePath) {

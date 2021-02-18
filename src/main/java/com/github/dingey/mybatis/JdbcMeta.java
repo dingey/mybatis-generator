@@ -68,7 +68,7 @@ public class JdbcMeta {
 		Table table = new Table();
 		table.setName(tableName);
 		// 主键
-		ResultSet primaryKeyResultSet = getConn().getMetaData().getPrimaryKeys(null, null, tableName);
+		ResultSet primaryKeyResultSet = getConn().getMetaData().getPrimaryKeys(catalog, null, tableName);
 		Map<String, String> primaryKeyMap = new HashMap<>();
 		while (primaryKeyResultSet.next()) {
 			String primaryKeyColumnName = primaryKeyResultSet.getString("COLUMN_NAME");
@@ -85,7 +85,7 @@ public class JdbcMeta {
 			foreignKeyMap.put(importKey.getName(), importKey);
 		}
 		// 提取表内的字段的名字和类型
-		ResultSet columnSet = getConn().getMetaData().getColumns(null, "%", tableName, "%");
+		ResultSet columnSet = getConn().getMetaData().getColumns(catalog, "", tableName, "%");
 		List<Column> columns = new ArrayList<>();
 		List<Column> primaryColumns = new ArrayList<>();
 		List<Column> allColumns = new ArrayList<>();
