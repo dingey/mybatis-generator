@@ -133,6 +133,9 @@ public class MybatisGeneratorImpl implements MybatisGenerator {
                         s.append("    @NotNull\n");
                     }
                 }
+                if (c.isPrimaryKey()) {
+                    s.append("    @javax.persistence.Id\n");
+                }
                 s.append("    private ").append(java.getSimpleName()).append(" ").append(StringUtil.camelCase(c.getColumnName())).append(";\n");
             }
             if (!getOption().isLombok()) {
