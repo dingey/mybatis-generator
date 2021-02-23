@@ -198,29 +198,27 @@ public class MybatisGeneratorImpl implements MybatisGenerator {
                 }
             }
             s.append(" {\n");
-            if (key != null) {
-                if (!extendsClassMethods.contains("delete")) {
-                    if (getOption().isMethodAnnotation()) {
-                        s.append("\n    /**\n");
-                        s.append("     * 根据主键删除\n");
-                        s.append("     *\n");
-                        s.append("     * @param ").append(keyName).append(" 主键\n");
-                        s.append("     * @return 影响行数\n");
-                        s.append("     */");
-                    }
-                    s.append("\n    int delete(").append(TypeAdaptor.java(key).getSimpleName()).append(" ").append(keyName).append(");\n");
+            if (!extendsClassMethods.contains("delete") || !extendsClassMethods.contains("deleteById")) {
+                if (getOption().isMethodAnnotation()) {
+                    s.append("\n    /**\n");
+                    s.append("     * 根据主键删除\n");
+                    s.append("     *\n");
+                    s.append("     * @param ").append(keyName).append(" 主键\n");
+                    s.append("     * @return 影响行数\n");
+                    s.append("     */");
                 }
-                if (!extendsClassMethods.contains("get")) {
-                    if (getOption().isMethodAnnotation()) {
-                        s.append("\n    /**\n");
-                        s.append("     * 根据主键查询\n");
-                        s.append("     *\n");
-                        s.append("     * @param ").append(keyName).append(" 主键\n");
-                        s.append("     * @return 一条记录\n");
-                        s.append("     */");
-                    }
-                    s.append("\n    int get(").append(TypeAdaptor.java(key).getSimpleName()).append(" ").append(keyName).append(");\n");
+                s.append("\n    int delete(").append(TypeAdaptor.java(key).getSimpleName()).append(" ").append(keyName).append(");\n");
+            }
+            if (!extendsClassMethods.contains("get")) {
+                if (getOption().isMethodAnnotation()) {
+                    s.append("\n    /**\n");
+                    s.append("     * 根据主键查询\n");
+                    s.append("     *\n");
+                    s.append("     * @param ").append(keyName).append(" 主键\n");
+                    s.append("     * @return 一条记录\n");
+                    s.append("     */");
                 }
+                s.append("\n    int get(").append(TypeAdaptor.java(key).getSimpleName()).append(" ").append(keyName).append(");\n");
             }
             if (!extendsClassMethods.contains("list")) {
                 if (getOption().isMethodAnnotation()) {

@@ -58,7 +58,7 @@ public interface MybatisGenerator {
     /**
      * 设置类型转换
      *
-     * @param type      数据库类型
+     * @param type      数据库类型： VARCHAR(50) 、DECIMAL(6,2)、DATETIME等
      * @param javaClass java类型
      * @return 生成类
      */
