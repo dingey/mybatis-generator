@@ -198,7 +198,7 @@ public class MybatisGeneratorImpl implements MybatisGenerator {
                 }
             }
             s.append(" {\n");
-            if (!extendsClassMethods.contains("delete") || !extendsClassMethods.contains("deleteById")) {
+            if (!extendsClassMethods.contains("delete") && !extendsClassMethods.contains("deleteById")) {
                 if (getOption().isMethodAnnotation()) {
                     s.append("\n    /**\n");
                     s.append("     * 根据主键删除\n");
